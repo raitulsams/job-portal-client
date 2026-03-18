@@ -3,8 +3,10 @@ import logo from "../../assets/logo.png"
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import { use } from "react";
 import Swal from "sweetalert2";
+
 const NavBar = () => {
     const { user, signOutUser } = use(AuthContext);
+
     const handleSignOut = () => {
         signOutUser()
             .then(() => {
@@ -15,10 +17,10 @@ const NavBar = () => {
                     timer: 1500,
                     showConfirmButton: false
                 });
-
             })
             .catch(err => console.log(err))
     }
+
     const links = (
         <>
             <li><NavLink to="/">Home</NavLink></li>
@@ -35,7 +37,9 @@ const NavBar = () => {
             <li><NavLink to="#">Candidates</NavLink></li>
             <li><NavLink to="#">Blog</NavLink></li>
             <li><NavLink to="#">Pages</NavLink></li>
-        </>)
+        </>
+    )
+
     return (
         <div className="navbar bg-base-100 shadow-sm">
             <div className="navbar-start">
@@ -48,11 +52,19 @@ const NavBar = () => {
                         tabIndex="-1"
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         {links}
+
+                        {/* Added Auth buttons for the mobile dropdown */}
+                        {user ? (
+                            <li><button onClick={handleSignOut}>Logout</button></li>
+                        ) : (
+                            <>
+                                <li><NavLink to="/register">Register</NavLink></li>
+                                <li><NavLink to="/login">Login</NavLink></li>
+                            </>
+                        )}
                     </ul>
                 </div>
                 <NavLink to="/">
-
-
                     <div className="relative z-10 flex justify-center items-center h-full">
                         <img
                             src={logo}
@@ -64,23 +76,27 @@ const NavBar = () => {
                         </p>
                     </div>
                 </NavLink>
-                {/* <a className="btn btn-ghost text-xl">daisyUI</a> */}
             </div>
+
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     {links}
                 </ul>
             </div>
+
             <div className="navbar-end">
-                {
-                    user ?
-                        <button onClick={handleSignOut} className="btn btn-xs sm:btn-sm md:btn-sm lg:btn-md xl:btn-md">Logout</button>
-                        :
-                        <>
-                            <NavLink to="/register"><button className="btn btn-link btn-xs sm:btn-sm md:btn-sm lg:btn-md xl:btn-md">Register</button></NavLink>
-                            <NavLink to="/login"><button className="btn btn-xs sm:btn-sm md:btn-sm lg:btn-md xl:btn-md">Login</button></NavLink>
-                        </>
-                }
+                {/* Wrapped the desktop buttons in 'hidden lg:flex' so they disappear on small screens */}
+                <div className="hidden lg:flex items-center gap-2">
+                    {
+                        user ?
+                            <button onClick={handleSignOut} className="btn btn-xs sm:btn-sm md:btn-sm lg:btn-md xl:btn-md">Logout</button>
+                            :
+                            <>
+                                <NavLink to="/register"><button className="btn btn-link btn-xs sm:btn-sm md:btn-sm lg:btn-md xl:btn-md">Register</button></NavLink>
+                                <NavLink to="/login"><button className="btn btn-xs sm:btn-sm md:btn-sm lg:btn-md xl:btn-md">Login</button></NavLink>
+                            </>
+                    }
+                </div>
             </div>
         </div>
     );
