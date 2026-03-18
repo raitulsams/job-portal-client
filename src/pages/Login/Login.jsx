@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 
 // --- Reusable Input Field Component (No color changes) ---
 const InputField = ({ label, name, type = 'text', placeholder, className = '', children }) => (
@@ -28,13 +29,18 @@ const InputField = ({ label, name, type = 'text', placeholder, className = '', c
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const { signInUser } = use(AuthContext);
 
     const handleLogin = (event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-
+        signInUser(email, password)
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(err => console.log(err))
         // Logic for login goes here (e.g., signInWithEmailAndPassword)
         console.log(email, password);
     };
