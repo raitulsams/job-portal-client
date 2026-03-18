@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 
 // --- Reusable Input Field Component ---
 const InputField = ({ label, name, type = 'text', placeholder, className = '', children }) => (
@@ -32,6 +33,7 @@ const InputField = ({ label, name, type = 'text', placeholder, className = '', c
 const Register = () => {
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const { createUser } = use(AuthContext);
 
     const handleRegister = (event) => {
         event.preventDefault();
@@ -69,6 +71,12 @@ const Register = () => {
         //         setError(err.message);
         //         console.error(err);
         //     })
+
+        createUser(email, password)
+            .then(result => {
+                console.log(result)
+            })
+            .catch(err => console.log(err))
     };
 
     return (
@@ -123,10 +131,7 @@ const Register = () => {
                                         {showPassword ? <VscEyeClosed size={20} /> : <VscEye size={20} />}
                                     </span>
                                 </InputField>
-
-                                <div><a className="link link-hover">Forgot password?</a></div>
-
-                                <button className="btn btn-primary mt-4">Login</button>
+                                <button className="btn btn-primary mt-4">Register</button>
                             </fieldset>
                         </form>
                     </div>
