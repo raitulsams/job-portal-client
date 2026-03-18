@@ -38,7 +38,14 @@ const Login = () => {
         const password = form.password.value;
         signInUser(email, password)
             .then(result => {
-                console.log(result.user)
+                console.log(result.user);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Logged in successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             })
             .catch(err => console.log(err))
         // Logic for login goes here (e.g., signInWithEmailAndPassword)

@@ -1,6 +1,24 @@
 import { NavLink } from "react-router";
 import logo from "../../assets/logo.png"
+import { AuthContext } from "../../contexts/AuthContext/AuthContext";
+import { use } from "react";
+import Swal from "sweetalert2";
 const NavBar = () => {
+    const { user, signOutUser } = use(AuthContext);
+    const handleSignOut = () => {
+        signOutUser()
+            .then(() => {
+                Swal.fire({
+                    title: "Logged out successfully!",
+                    icon: "error",
+                    draggable: false,
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+
+            })
+            .catch(err => console.log(err))
+    }
     const links = (
         <>
             <li><NavLink to="/">Home</NavLink></li>
@@ -54,10 +72,15 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <NavLink to="/register"><button className="btn btn-link btn-xs sm:btn-sm md:btn-sm lg:btn-md xl:btn-md">Register</button></NavLink>
-                <NavLink to="/login"><button className="btn btn-xs sm:btn-sm md:btn-sm lg:btn-md xl:btn-md">Login</button></NavLink>
-
-
+                {
+                    user ?
+                        <button onClick={handleSignOut} className="btn btn-xs sm:btn-sm md:btn-sm lg:btn-md xl:btn-md">Logout</button>
+                        :
+                        <>
+                            <NavLink to="/register"><button className="btn btn-link btn-xs sm:btn-sm md:btn-sm lg:btn-md xl:btn-md">Register</button></NavLink>
+                            <NavLink to="/login"><button className="btn btn-xs sm:btn-sm md:btn-sm lg:btn-md xl:btn-md">Login</button></NavLink>
+                        </>
+                }
             </div>
         </div>
     );
