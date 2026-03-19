@@ -23,16 +23,16 @@ const floatingAnimationImg = {
     }
 };
 const floatingAnimationImg2 = {
-    x: [0, 30],
+    x: [0, 70],
     transition: {
-        duration: 5,
+        duration: 2,
         repeat: Infinity,
         repeatType: "reverse",
         ease: "easeInOut"
     }
 };
 const floatingAnimationImg3 = {
-    y: [0, 10],
+    x: [0, -50, 0],
     transition: {
         duration: 5,
         repeat: Infinity,
@@ -96,11 +96,11 @@ const Banner = () => {
                     <div className="w-1/2 relative min-h-[300px] sm:min-h-[500px] lg:min-h-[700px] flex items-center justify-center">
 
                         {/* Top Right Hexagon */}
-                        <motion.div
+                        {/* <motion.div
                             initial={{ opacity: 0, scale: 0.2 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ type: "spring", stiffness: 150, damping: 15, delay: 0.1 }}
-                            className="absolute top-0 right-[5%] lg:right-[10%] z-10"
+                            className="absolute top-0 right-[5%] lg:right-[40%] z-10"
                         >
                             <motion.div
                                 // animate={floatingAnimation}
@@ -110,7 +110,7 @@ const Banner = () => {
                                 <Briefcase className="text-primary mb-1 lg:mb-2 w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />
                                 <p className="text-[0.5rem] sm:text-[0.6rem] lg:text-xs font-semibold text-center leading-tight">I am looking<br />for a job</p>
                             </motion.div>
-                        </motion.div>
+                        </motion.div> */}
 
                         {/* Left Pill Image */}
                         <motion.div
@@ -121,7 +121,7 @@ const Banner = () => {
                         </motion.div>
 
                         {/* Center Dark Hexagon - Wrapped to separate spring entrance from float loop */}
-                        <div className="absolute top-[40%] left-[40%] z-20"
+                        {/* <div className="absolute top-[40%] left-[40%] z-20"
                         >
                             <motion.div
                                 // animate={floatingAnimationIcon}
@@ -133,27 +133,23 @@ const Banner = () => {
                                 </div>
                                 <p className="text-[0.5rem] sm:text-[0.6rem] lg:text-xs font-semibold text-center text-neutral-content leading-tight">We are<br />hiring!</p>
                             </motion.div>
-                        </div>
+                        </div> */}
 
                         {/* Right Pill Image */}
                         <motion.div
                             animate={floatingAnimationImg}
-                            className="absolute top-[30%] right-[5%] w-16 h-28 sm:w-28 sm:h-48 lg:w-48 lg:h-80 rounded-full overflow-hidden bg-secondary shadow-lg z-10"
+                            className="absolute top-[15%] right-[5%] w-16 h-28 sm:w-28 sm:h-48 lg:w-48 lg:h-80 rounded-full overflow-hidden bg-secondary shadow-lg z-10"
                         >
                             <img src={banner_2} alt="" className="w-full h-full object-cover" />
                         </motion.div>
 
                         {/* Bottom Left Hexagon */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.5 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ type: "spring", stiffness: 50, damping: 15 }}
-                            className="absolute bottom-[5%] left-[20%] z-20"
+                        {/* <motion.div className="absolute bottom-[5%] left-[0%] z-20"
                         >
                             <motion.div
-                                animate={{ opacity: [0.5, 0, 0.5] }} // Tells it to animate between these two values
+                                animate={{ opacity: [1, 0, 1] }} // Tells it to animate between these two values
                                 transition={{
-                                    duration: 8,
+                                    duration: 1,
                                     repeat: Infinity,
                                     // repeatType: "reverse", // Makes it go 0.5 -> 0 -> 0.5 smoothly
                                     ease: "easeInOut"
@@ -164,15 +160,17 @@ const Banner = () => {
                                 <Bell className="text-primary mb-1 lg:mb-2 w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />
                                 <p className="text-[0.5rem] sm:text-[0.6rem] lg:text-xs font-semibold text-center leading-tight">Personalized<br />jobs alert</p>
                             </motion.div>
-                        </motion.div>
+                        </motion.div> */}
 
                         {/* Bottom Arch Image */}
                         <motion.div
                             animate={floatingAnimationImg3}
-                            className="absolute -bottom-[10%] right-[30%] w-16 h-24 sm:w-28 sm:h-40 lg:w-48 lg:h-72 rounded-t-full overflow-hidden bg-accent shadow-lg z-0"
+                            className="absolute -bottom-[2%] right-[30%] w-16 h-24 sm:w-28 sm:h-40 lg:w-48 lg:h-72 rounded-full overflow-hidden bg-accent shadow-lg z-0"
                         >
                             <img src={banner_3} alt="" className="w-full h-full object-cover" />
                         </motion.div>
+
+
 
                     </div>
                 </div>
