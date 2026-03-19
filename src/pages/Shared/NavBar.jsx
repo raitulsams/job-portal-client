@@ -71,7 +71,7 @@ const NavBar = () => {
                             alt="Espresso Emporium Logo"
                             className="h-12 w-auto object-contain"
                         />
-                        <p className="font-rancho text-xl">
+                        <p className="font-rancho font-bold">
                             Arbeit
                         </p>
                     </div>

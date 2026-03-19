@@ -4,6 +4,7 @@ import { AuthContext } from './AuthContext';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import { auth } from '../../firebase/firebase.init';
 import { GoogleAuthProvider } from "firebase/auth";
+import Lenis from 'lenis';
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -29,6 +30,21 @@ const AuthProvider = ({ children }) => {
     const signOutUser = () => {
         return signOut(auth);
     }
+
+    useEffect(() => {
+        const lenis = new Lenis({
+            autoRaf: true, // Automatically runs the requestAnimationFrame loop
+            duration: 1.2, // The length of the glide (higher = smoother/longer)
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // The easing math
+            smoothWheel: true,
+            touchMultiplier: 2, // Makes touchpads feel more responsive
+        });
+
+        // Cleanup when the component unmounts
+        return () => {
+            lenis.destroy();
+        };
+    }, []);
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
